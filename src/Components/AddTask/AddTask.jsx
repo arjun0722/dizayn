@@ -74,6 +74,8 @@ function AddTask() {
   };
 
   const handleSubmit = () => {
+
+    console.log("eeeeeeeeeeeeeeeeee",task)
     const areAllKeysFilled = Object.keys(task).every((key) => {
       const value = task[key];
   
@@ -84,7 +86,7 @@ function AddTask() {
       }
     });
   
-    if (areAllKeysFilled) {
+    if (task.heading.length > 0 && task.subHeading.length >0) {
       saveTaskToIndexedDB(task);
       setTask({
         heading: "",
@@ -97,6 +99,9 @@ function AddTask() {
     } else {
       // Display the alert
       setShowAlert(true);
+       setTimeout(() => {
+        setShowAlert(false);
+      }, 2000);
     }
   };
   

@@ -11,35 +11,73 @@ function Page() {
   const { index } = useParams();
   const cardIndex = Number(index);
 
+  // const retrieveDataFromIndexedDB = () => {
+  //   const dbName = "myDatabase";
+  //   const dbVersion = 1;
+
+  //   const request = indexedDB.open(dbName, dbVersion);
+
+  //   request.onsuccess = function (event) {
+  //     const db = event.target.result;
+  //     const transaction = db.transaction("tasks", "readonly");
+
+  //     const objectStore = transaction.objectStore("tasks");
+
+  //     const getRequest = objectStore.getAll();
+
+  //     getRequest.onsuccess = function () {
+  //       const data = getRequest.result;
+  //       console.log("wwwwwwwwwwwwww",data)
+  //       setIndexDbData(data[cardIndex]);
+        
+  //     };
+
+  //     getRequest.onerror = function () {
+  //       console.error("Error retrieving data from IndexedDB");
+  //     };
+  //   };
+  // };
+
+  
+
+  // useEffect(() => {
+  //   retrieveDataFromIndexedDB();
+  // }, []);
+
   const retrieveDataFromIndexedDB = () => {
     const dbName = "myDatabase";
-    const dbVersion = 1;
-
-    const request = indexedDB.open(dbName, dbVersion);
-
+  
+    const request = indexedDB.open(dbName);
+  
     request.onsuccess = function (event) {
       const db = event.target.result;
-      const transaction = db.transaction("tasks", "readonly");
-
-      const objectStore = transaction.objectStore("tasks");
-
-      const getRequest = objectStore.getAll();
-
-      getRequest.onsuccess = function () {
-        const data = getRequest.result;
-        setIndexDbData(data[cardIndex]);
-        
-      };
-
-      getRequest.onerror = function () {
-        console.error("Error retrieving data from IndexedDB");
-      };
+  
+      if (db.objectStoreNames.contains("tasks")) {
+        const transaction = db.transaction("tasks", "readonly");
+        const objectStore = transaction.objectStore("tasks");
+  
+        const getRequest = objectStore.getAll();
+  
+        getRequest.onsuccess = function () {
+          const data = getRequest.result;
+          setIndexDbData(data[cardIndex]);
+          console.log("Data retrieved from IndexedDB:", data);
+        };
+  
+        getRequest.onerror = function () {
+          console.error("Error retrieving data from IndexedDB");
+        };
+      } else {
+        console.error("The 'tasks' object store does not exist.");
+      }
     };
   };
-
-  useEffect(() => {
-    retrieveDataFromIndexedDB();
-  }, []);
+  
+  
+  
+    useEffect(() => {
+      retrieveDataFromIndexedDB();
+    }, []);
 
   const handleAccessiories = async (e) => {
     const reader = new FileReader();

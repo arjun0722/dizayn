@@ -45,7 +45,7 @@ function AddTask() {
 
   const saveTaskToIndexedDB = (task) => {
     const dbName = "myDatabase";
-    const dbVersion = 1;
+    const dbVersion = 2;
 
     const request = indexedDB.open(dbName, dbVersion);
 
@@ -74,19 +74,13 @@ function AddTask() {
   };
 
   const handleSubmit = () => {
-
-    console.log("eeeeeeeeeeeeeeeeee",task)
-    const areAllKeysFilled = Object.keys(task).every((key) => {
-      const value = task[key];
-  
-      if (Array.isArray(value)) {
-        return value.length > 0;
-      } else {
-        return value !== undefined && value !== "";
-      }
-    });
-  
-    if (task.heading.length > 0 && task.subHeading.length >0) {
+    if (
+      task.heading.length > 0 &&
+      task.subHeading.length > 0 &&
+      task["image/png"].length > 0 &&
+      task["audio/ogg"].length > 0 &&
+      task["video/mp4"].length > 0
+    ) {
       saveTaskToIndexedDB(task);
       setTask({
         heading: "",
@@ -99,12 +93,11 @@ function AddTask() {
     } else {
       // Display the alert
       setShowAlert(true);
-       setTimeout(() => {
+      setTimeout(() => {
         setShowAlert(false);
       }, 2000);
     }
   };
-  
 
   const handleBack = () => {
     navigate("/");
@@ -152,8 +145,8 @@ function AddTask() {
       <div className="svg_con">
         <Svg handleAccessiories={handleAccessiories} />
       </div>
-      <div style={{marginBottom : "20px"}}>
-      {showAlert && <Alerts  msg="Not filled properly" />}
+      <div style={{ marginBottom: "20px" }}>
+        {showAlert && <Alerts msg="Not filled properly" />}
       </div>
     </div>
   );

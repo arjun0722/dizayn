@@ -16,16 +16,16 @@ function Task() {
 const formattedDateTime = format(currentDateTime, "HH:mm a dd MMM");
 
 
-  const retrieveDataFromIndexedDB = () => {
-    const dbName = "myDatabase";
-    const dbVersion = 1;
+const retrieveDataFromIndexedDB = () => {
+  const dbName = "myDatabase";
 
-    const request = indexedDB.open(dbName, dbVersion);
+  const request = indexedDB.open(dbName);
 
-    request.onsuccess = function (event) {
-      const db = event.target.result;
+  request.onsuccess = function (event) {
+    const db = event.target.result;
+
+    if (db.objectStoreNames.contains("tasks")) {
       const transaction = db.transaction("tasks", "readonly");
-
       const objectStore = transaction.objectStore("tasks");
 
       const getRequest = objectStore.getAll();
@@ -39,8 +39,13 @@ const formattedDateTime = format(currentDateTime, "HH:mm a dd MMM");
       getRequest.onerror = function () {
         console.error("Error retrieving data from IndexedDB");
       };
-    };
+    } else {
+      console.error("The 'tasks' object store does not exist.");
+    }
   };
+};
+
+
 
   useEffect(() => {
     retrieveDataFromIndexedDB();

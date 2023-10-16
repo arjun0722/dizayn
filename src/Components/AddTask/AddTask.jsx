@@ -3,6 +3,9 @@ import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Svg from "../svgcomp/Svg";
 import { useNavigate } from "react-router-dom";
+
+import Alerts from "../Alert/Alert";
+
 import "./AddTask.css";
 function AddTask() {
   const intialTaskValue = {
@@ -13,6 +16,7 @@ function AddTask() {
     "video/mp4": [],
     moreInfo: "",
   };
+  const [showAlert, setShowAlert] = useState(false);
 
   const [task, setTask] = useState(intialTaskValue);
   const navigate = useNavigate();
@@ -70,16 +74,32 @@ function AddTask() {
   };
 
   const handleSubmit = () => {
-    saveTaskToIndexedDB(task);
-    setTask({
-      heading: "",
-      subHeading: "",
-      "image/png": [],
-      "audio/ogg": [],
-      "video/mp4": [],
-      moreInfo: "",
-    })
+    const areAllKeysFilled = Object.keys(task).every((key) => {
+      const value = task[key];
+  
+      if (Array.isArray(value)) {
+        return value.length > 0;
+      } else {
+        return value !== undefined && value !== "";
+      }
+    });
+  
+    if (areAllKeysFilled) {
+      saveTaskToIndexedDB(task);
+      setTask({
+        heading: "",
+        subHeading: "",
+        "image/png": [],
+        "audio/ogg": [],
+        "video/mp4": [],
+        moreInfo: "",
+      });
+    } else {
+      // Display the alert
+      setShowAlert(true);
+    }
   };
+  
 
   const handleBack = () => {
     navigate("/");
@@ -126,6 +146,9 @@ function AddTask() {
       </div>
       <div className="svg_con">
         <Svg handleAccessiories={handleAccessiories} />
+      </div>
+      <div style={{marginBottom : "20px"}}>
+      {showAlert && <Alerts  msg="Not filled properly" />}
       </div>
     </div>
   );

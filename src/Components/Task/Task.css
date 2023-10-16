@@ -1,0 +1,80 @@
+.task_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 60px;
+}
+
+.task_addbtn {
+  background-color: #579bc3 !important;
+
+  border-radius: 12px !important;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25) !important;
+  height: 3rem !important;
+  width: 6rem !important;
+}
+.task_notes {
+  color: #272728;
+  font-size: 32px;
+
+  font-weight: 500;
+  line-height: 38.14px;
+  letter-spacing: 0.48px;
+  word-wrap: break-word;
+}
+.container {
+  width: 100%;
+
+  height: 100vh;
+  background-color: #f2f4f7;
+  margin: 0;
+  padding: 0;
+}
+.task_con2 {
+  width: 70%;
+  margin: auto;
+  margin-top: 20px;
+}
+.task_con1 {
+  width: 70%;
+  margin: auto;
+}
+.card_task {
+  border-radius: 13px !important;
+  margin-bottom: 20px !important;
+  transition: transform 0.2s; /* Add a transition for smooth effect */
+}
+
+.card_task:hover {
+  transform: scale(1.05); /* Increase the size on hover */
+}
+.typo_heading {
+  width: 100% !important;
+  color: #272728 !important;
+  font-size: 15px !important;
+  font-family: Roboto !important;
+  font-weight: 600 !important;
+  line-height: 20px !important;
+  word-wrap: break-word !important;
+  text-align: left !important;
+}
+.typo_subHeading {
+  width: 100% !important;
+  color: #272728 !important;
+  font-size: 15px !important;
+  font-family: Roboto !important;
+  font-weight: 500 !important;
+  line-height: 18px !important;
+  word-wrap: break-word !important;
+  text-align: left !important;
+}
+.typo_time {
+  width: 100% !important;
+  color: #a6a6a6 !important;
+  font-size: 10px !important;
+  font-family: Roboto !important;
+  font-weight: 500 !important;
+  line-height: 18px !important;
+  word-wrap: break-word !important;
+  text-align: left !important;
+}

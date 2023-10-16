@@ -1,0 +1,151 @@
+.moreInfo_indexDb{
+outline: none;
+border: none;
+align-self: stretch;
+color: #757575;
+font-size: 14px;
+font-family: Roboto;
+font-weight: 400;
+line-height: 24px;
+word-wrap: break-word;
+width: 100%;
+}
+.svg_control_div{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+    margin: 0 auto;
+}
+.containerStyle{
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 7px;
+    display: inline-flex;
+}
+.conHeader{
+    width: 70%;
+    margin: auto;
+    padding-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.page_sub{
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0.50 !important;
+    background-color: #579BC3 !important;
+    border-radius: 8px !important;
+}
+.con{
+    width: 70%;
+    margin: auto;
+    margin-top: 60px;
+}
+.titleStyle{
+    width: 100%;
+    height: 24px;
+    text-align: justify;
+    color: #272728;
+    font-size: 18px;
+    font-family: Roboto;
+    font-weight: 400;
+    line-height: 20px;
+    word-wrap: break-word;
+}
+.contentStyle{
+    align-self: stretch;
+    color: #757575;
+    font-size: 14px;
+    font-family: Roboto;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+.conLorem{
+    width: 70%;
+    margin: auto;
+}
+.centerBox{
+    width: 70%;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.imageStyle{
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    height: 240px;
+    gap: 15px;
+    justify-content: center;
+}
+.imageStyle::-webkit-scrollbar {
+    width: 0;
+  }
+.videoStyle{
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    height: 240px;
+    gap: 15px;
+    justify-content: center;
+}
+.videoStyle::-webkit-scrollbar {
+    width: 0;
+  }
+.audioStyle{
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.audioStyle::-webkit-scrollbar {
+    width: 0;
+  }
+/* Target the audio element itself */
+audio {
+    /* Set border-radius to 0 to remove rounded corners */
+    width: 70%;
+    border-radius: 12px;
+    /* Set background color to #D3E2ED */
+    background-color: #f3f3f3;
+  }
+  
+  /* Customize the volume slider */
+  audio::-webkit-media-controls-volume-slider {
+    background: #ccc;
+  }
+  audio::-webkit-media-controls-play-button {
+    background-color: #0073e6;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+  }
+  
+/* Responsive styles for screens up to 600px */
+@media screen and (max-width: 600px) {
+    audio {
+      width: 100%;
+    }
+  }
+  
+  /* Responsive styles for screens up to 960px */
+  @media screen and (max-width: 960px) {
+    audio {
+        width: 100%;
+        padding: 8px;
+      }
+  }

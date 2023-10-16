@@ -1,0 +1,16 @@
+.svg_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+}
+.svg_access{
+    background-color: #E9F1F6;
+    border-radius: 8px;
+    height: 35px;
+    width: 50px;
+}
+.style_svg{
+    padding: 4px !important;
+    margin: 0px 8px !important;
+}

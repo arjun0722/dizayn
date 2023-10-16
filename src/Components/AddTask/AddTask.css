@@ -1,0 +1,49 @@
+.addTask_container {
+  width: 85%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.task_addbtnbtn {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  background-color: #579bc3;
+  border-radius: 8px !important;
+}
+.input_heading{
+    outline: none;
+    border: none;
+    color: #272728;
+    font-size: 18px;
+    font-family: Roboto;
+    font-weight: 400;
+    line-height: 18px;
+    word-wrap: break-word;
+    width: 100%;
+}
+.input_subHeading{
+    outline: none;
+    border: none;
+    color: #272728;
+    font-size: 14px;
+    font-family: Roboto;
+    font-weight: 400;
+    line-height: 18px;
+    word-wrap: break-word;
+    width: 100%;
+    margin-top: 10px;
+}
+.svg_con{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+.addTask_inputs{
+    width: 50%;
+    margin: auto;
+    margin-top: 20px;
+}

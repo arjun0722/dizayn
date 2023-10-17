@@ -46,32 +46,38 @@ function AddTask() {
   const saveTaskToIndexedDB = (task) => {
     const dbName = "myDatabase";
     const dbVersion = 2;
-
+    const objectStoreName = "tasks";
+  
     const request = indexedDB.open(dbName, dbVersion);
-
+  
     request.onupgradeneeded = function (event) {
       const db = event.target.result;
-      const objectStore = db.createObjectStore("tasks", {
-        keyPath: "id",
-        autoIncrement: true,
-      });
+      
+      // Check if the object store already exists
+      if (!db.objectStoreNames.contains(objectStoreName)) {
+        const objectStore = db.createObjectStore(objectStoreName, {
+          keyPath: "id",
+          autoIncrement: true,
+        });
+      }
     };
-
+  
     request.onsuccess = function (event) {
       const db = event.target.result;
-      const transaction = db.transaction("tasks", "readwrite");
-      const objectStore = transaction.objectStore("tasks");
+      const transaction = db.transaction(objectStoreName, "readwrite");
+      const objectStore = transaction.objectStore(objectStoreName);
       const addObjectRequest = objectStore.add(task);
-
+  
       addObjectRequest.onsuccess = function () {
         console.log("Task has been added to IndexedDB");
       };
-
+  
       addObjectRequest.onerror = function () {
         console.error("Error adding task to IndexedDB");
       };
     };
   };
+  
 
   const handleSubmit = () => {
     if (

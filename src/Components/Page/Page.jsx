@@ -3,9 +3,16 @@ import { Button } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Svg from "../svgcomp/Svg";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Alerts from "../Alert/Alert";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 import "./Page.css";
-import AudioPlayer from "../Audioplayer/audioplayer";
+
 function Page() {
+  const [showAlert, setShowAlert] = useState(false);
   const [indexDbData, setIndexDbData] = useState();
   const navigate = useNavigate();
   const { index } = useParams();
@@ -15,24 +22,24 @@ function Page() {
 
   const retrieveDataFromIndexedDB = () => {
     const dbName = "myDatabase";
-  
+
     const request = indexedDB.open(dbName);
-  
+
     request.onsuccess = function (event) {
       const db = event.target.result;
-  
+
       if (db.objectStoreNames.contains("tasks")) {
         const transaction = db.transaction("tasks", "readonly");
         const objectStore = transaction.objectStore("tasks");
-  
+
         const getRequest = objectStore.getAll();
-  
+
         getRequest.onsuccess = function () {
           const data = getRequest.result;
           setIndexDbData(data[cardIndex]);
           console.log("Data retrieved from IndexedDB:", data);
         };
-  
+
         getRequest.onerror = function () {
           console.error("Error retrieving data from IndexedDB");
         };
@@ -41,23 +48,20 @@ function Page() {
       }
     };
   };
-  
-  
-  
-    useEffect(() => {
-      retrieveDataFromIndexedDB();
-    }, []);
 
-    
+  useEffect(() => {
+    retrieveDataFromIndexedDB();
+  }, []);
 
   const handleAccessiories = async (e) => {
     const reader = new FileReader();
+    const splittedType = e[0].type.split("/");
     reader.onload = async (event) => {
       const result = event.target.result;
 
       setIndexDbData({
         ...indexDbData,
-        [e[0].type]: [...indexDbData[e[0].type], result],
+        [splittedType[0]]: [...indexDbData[splittedType[0]], result],
       });
     };
 
@@ -71,7 +75,6 @@ function Page() {
       [name]: value,
     });
   };
-
 
   const handleSubmit = () => {
     const dbName = "myDatabase";
@@ -98,17 +101,45 @@ function Page() {
         );
       };
     };
+    // window.location.reload();
+    toast.success('data update successfully', {
+      position: toast.POSITION.TOP_RIGHT
+  });
+
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
   };
-
-
-  
 
   const handleBack = () => {
     navigate("/");
   };
 
+  const handleDelete = (acess, index) => {
+    if (acess === "image") {
+      indexDbData["image"].splice(index, 1);
+  const newImageArr = indexDbData["image"]
+
+      setIndexDbData({
+        ...indexDbData,
+       [ indexDbData["image"]] : newImageArr
+      });
+    } else {
+      indexDbData["video"].splice(index, 1);
+      const newVideoArr = indexDbData["video"]
+       setIndexDbData({
+        ...indexDbData,
+        [ indexDbData["video"]] : newVideoArr
+       });
+    }
+  };
+
+ 
+
   return (
     <div className="containerStyle">
+      
       <div className="conHeader">
         <div>
           <Button onClick={() => handleBack()}>
@@ -148,57 +179,51 @@ function Page() {
       </div>
       <div className="centerBox">
         <div>
-          {indexDbData && indexDbData["image/png"].length > 0 ? (
+          {indexDbData && indexDbData["audio"].length > 0 ? (
             <div>
-              <div className="titleStyle">Image:</div>
-              <div className="imageStyle">
-                {indexDbData["image/png"].map((img, ind) => {
-                  return <img src={img} />;
-                })}
-                <br />
-              </div>
-            </div>
-          ) 
-        :
-        null
-        }
-
-          {indexDbData && indexDbData["audio/ogg"].length > 0 ? (
-            <div>
-              <div className="titleStyle">Audio:</div>
-              <div className="audioStyle">
-                {indexDbData["audio/ogg"].map((audio, ind) => {
+              {/* <div className="titleStyle">Audio:</div> */}
+              <div>
+                {indexDbData["audio"].map((audio, ind) => {
                   return (
-                    <audio style={{width : "400px"}} controls>
+                    <audio className="audio1" controls>
                       <source src={audio} />
                     </audio>
+                  
                   );
                 })}
               </div>
             </div>
-          )
-        :
-        null
-        }
-          <br />
+          ) : null}
 
-          {indexDbData && indexDbData["video/mp4"].length > 0 ? (
-            <div>
-              <div className="titleStyle">Video:</div>
-              <div className="videoStyle">
-                {indexDbData["video/mp4"].map((video, ind) => {
-                  return (
-                    <video controls>
-                      <source src={video} />
-                    </video>
-                  );
-                })}
-              </div>
+          <br />
+          {indexDbData && indexDbData["image"].length > 0 ? (
+            <div className="image-container">
+              {indexDbData["image"].map((img, ind) => (
+                <div className="image-wrapper" key={ind}>
+                  <img className="images1" src={img} />
+                  <div className="delete-icon">
+                    <DeleteIcon onClick={() => handleDelete("image", img)} />
+                  </div>
+                </div>
+              ))}
             </div>
-          )
-        : 
-        null
-        }
+          ) : null}
+          {/* <br /> */}
+
+          {indexDbData && indexDbData["video"].length > 0 ? (
+            <div className="image-container">
+              {indexDbData["video"].map((video, ind) => (
+                <div className="image-wrapper" key={ind}>
+                  <video className="images1" controls>
+                    <source src={video} />
+                  </video>
+                  <div className="delete-icon">
+                    <DeleteIcon onClick={() => handleDelete("video", video)} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="svg_control_div">
@@ -221,7 +246,7 @@ function Page() {
           scrambled it to make a type specimen book. It has survived not only
           five centuries, but also the leap into electronic typesetting, rem
         </div>
-       
+
         <div>
           <input
             className="moreInfo_indexDb"
@@ -232,6 +257,7 @@ function Page() {
           />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

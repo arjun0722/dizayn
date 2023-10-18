@@ -71,47 +71,47 @@ width: 100%;
     margin: auto;
 }
 .centerBox{
-    width: 70%;
+    width: 60%;
     margin: auto;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 .imageStyle{
     width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-    display: flex;
+    /* overflow-x: auto; */
+    /* white-space: nowrap; */
+    /* display: flex; */
     height: 240px;
-    gap: 15px;
-    justify-content: center;
+    /* gap: 15px; */
+    /* justify-content: center; */
 }
-.imageStyle::-webkit-scrollbar {
+/* .imageStyle::-webkit-scrollbar {
     width: 0;
-  }
+  } */
 .videoStyle{
-    width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-    display: flex;
-    height: 240px;
-    gap: 15px;
-    justify-content: center;
+    /* width: 100%; */
+    /* overflow-x: auto; */
+    /* white-space: nowrap; */
+    /* display: flex; */
+    height: 240px !important;
+    /* gap: 15px; */
+    /* justify-content: center; */
 }
-.videoStyle::-webkit-scrollbar {
+/* .videoStyle::-webkit-scrollbar {
     width: 0;
-  }
+  } */
 .audioStyle{
     width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* overflow-x: auto; */
+    /* white-space: nowrap; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
     gap: 15px;
 }
-.audioStyle::-webkit-scrollbar {
+/* .audioStyle::-webkit-scrollbar {
     width: 0;
-  }
+  } */
 /* Target the audio element itself */
 audio {
     /* Set border-radius to 0 to remove rounded corners */
@@ -134,18 +134,62 @@ audio {
     height: 30px;
     font-size: 20px;
   }
-  
-/* Responsive styles for screens up to 600px */
-@media screen and (max-width: 600px) {
-    audio {
-      width: 100%;
-    }
+
+  .audio1{
+    width: 100%;
+    display: flex;
+    margin: auto;
   }
-  
-  /* Responsive styles for screens up to 960px */
-  @media screen and (max-width: 960px) {
-    audio {
-        width: 100%;
-        padding: 8px;
-      }
-  }
+
+.image-container {
+ /* yes */
+}
+
+.image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 5px 0px;
+ 
+}
+
+.images1 {
+  width: 100%;
+  /* max-width: 100%; */
+  height: auto;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px;
+  color: rgb(95, 9, 9);
+  border-radius: 50%;
+  cursor: pointer;
+
+}
+.video-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.video-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+    align-items: center;
+}
+
+.video1 {
+  width: 100%;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+}
